@@ -48,9 +48,11 @@ export default {
     console.log('输出header:'+JSON.stringify(ctx.header))
     try {
       const ut = ctx.header.authorization
+      console.log(ut)
       // const ut = a
       const userInfo = getAuthInfo(ut)
       ctx.success(userInfo)
+      //ctx.body = {userInfo}
       console.log('输出userInfo:'+ JSON.stringify(userInfo))
     } catch (error) {
       console.log('err:'+error)
@@ -93,7 +95,9 @@ export default {
         const u = user.dataValues
         // 用户登陆后只返回token,客户端根据token取得用户信息
         const token = createToken(u)
-        ctx.success({ token }, '用户登录成功')
+        const usertoken = 'Bearer '+token
+        // ctx.append('authorization','Bearer '+token);
+        ctx.success({ usertoken }, '用户登录成功')
       } else {
         ctx.notFound('用户名或者密码错误!', {username, password})
       }
@@ -130,5 +134,52 @@ export default {
       console.log(newUser)
       ctx.error('用户注册出错', err, newUser)
     }
+  },
+
+  delete: async (ctx) => {
+    let userId = ctx.params.id
+    console.log(userId)
+    try {
+      const user = await User.destroy({
+        where:{
+          id:userId
+        }
+      })
+      console.log(user)
+      if(user){
+        ctx.success('删除成功',user,userId)
+      }else{
+        ctx.error('删除失败', error, userId)
+      }
+    } catch (error) {
+      ctx.error('删除失败', error, userId)
+    }
+  },
+
+  update: async (ctx) => {
+    let userid = ctx.params.id
+    try {
+      const user = await User.findById(userid)
+      //console.log('findById'+JSON.stringify(user))
+      if(user){
+        const upUser =  User.update({
+          username: ctx.request.body.username,
+          password: md5(ctx.request.body.password),
+          email: ctx.request.body.email,
+          updated_at: currentDateTime()
+        },{
+          where:{
+            id:userid
+          }
+        })
+        //console.log('upuser'+JSON.stringify(upUser))
+        ctx.success('更新成功',upUser)
+      }else{
+        ctx.error('更新失败',upUser )
+      }
+    } catch (err) {
+      ctx.error('查询用户出错', err, {id: userid})
+    }
   }
+
 }

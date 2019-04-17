@@ -7,6 +7,7 @@ module.exports = requireDirectory(module)
 import User from './user.model'
 import FileUpload from './fileUpload.model'
 import TodoList from './todoList.model'
+import Article from './article.model'
 /**
  * 如果设置belongsTo在hasMany增加外键约束constraints: false是不好用的
  * 如果不设置belongsTo在hasMany增加外键约束constraints: false是好用的
@@ -21,4 +22,4 @@ User.hasMany(TodoList, {
 // 重新创建所有的表结构
 // db.sync({force: true})
 
-export { User, FileUpload, TodoList }
+export { User, FileUpload, TodoList, Article }

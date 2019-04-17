@@ -42,6 +42,6 @@ export let getAuthInfo = (token) => {
  * 取得token解码后的用户信息
  */
 export let getAuthInfo = (token) => {
-  console.log('解密后的用户信息'+jwt.verify(token.substr(7), publicKey))
+  console.log('解密后的用户信息'+JSON.stringify(jwt.verify(token.substr(7), publicKey)))
   return jwt.verify(token.substr(7), publicKey)
 }

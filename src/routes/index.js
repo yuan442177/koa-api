@@ -2,6 +2,7 @@ import { userrouter, userListapi } from './user.route'
 import testRoute from './test.route'
 import fileUpDownRoute from './fileUpDown.route'
 import { todoListPub, todoListAPI } from './todoList.route'
+import { articlePublic, articleApi } from './article.route'
 import Router from 'koa-router'
 
 const router = new Router()
@@ -11,6 +12,8 @@ const router = new Router()
   .use(fileUpDownRoute.routes())
   .use(todoListPub.routes())
   .use(todoListAPI.routes())
+  .use(articlePublic.routes())
+  .use(articleApi.routes())
 
 router
   .get('/public/get', function (ctx, next) {
