@@ -159,10 +159,13 @@ export default {
   update: async (ctx) => {
     let userid = ctx.params.id
     try {
-      const user = await User.findById(userid)
-      //console.log('findById'+JSON.stringify(user))
+      const user = await User.findOne({
+        where:{
+          id:userid
+        }
+      })
       if(user){
-        const upUser =  User.update({
+          const upUser =  User.update({
           username: ctx.request.body.username,
           password: md5(ctx.request.body.password),
           email: ctx.request.body.email,
@@ -172,7 +175,6 @@ export default {
             id:userid
           }
         })
-        //console.log('upuser'+JSON.stringify(upUser))
         ctx.success('更新成功',upUser)
       }else{
         ctx.error('更新失败',upUser )

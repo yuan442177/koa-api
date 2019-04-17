@@ -20,13 +20,18 @@ export default {
     try {
       let ArticleID = ctx.params.id
       console.log(ArticleID)
-      const article = await Article.findById(ArticleID)
+      const article = await Article.findOne({
+        where:{
+          id:ArticleID
+        }
+      })
       //console.log(article)
       if(article != null){
         console.log(article.dataValues)
         ctx.success('查询成功',article)
       }else{
-        ctx.success('查无此文',{ArticleID,article})
+        console.log(article.dataValues)
+        ctx.success('查无此文',article)
       }
     } catch (err) {
       ctx.success('查无此文',err)
