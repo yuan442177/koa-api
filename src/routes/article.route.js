@@ -10,6 +10,8 @@ const articlePublic = new Router({prefix: '/public/v1/Article'})
 // 需要有用户登录权限
 const articleApi = new Router({prefix: '/api/v1/Article'})
   .get('/', Article.getAllArticle)
+  .get('/:pid', Article.getAllArticle)
   .get('/:id', Article.getArticle)
+  .post('/addArticle', Article.createArticle)
 
 export { articlePublic, articleApi }

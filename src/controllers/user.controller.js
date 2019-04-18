@@ -95,9 +95,9 @@ export default {
         const u = user.dataValues
         // 用户登陆后只返回token,客户端根据token取得用户信息
         const token = createToken(u)
-        const usertoken = 'Bearer '+token
+        const authorization = 'Bearer '+token
         // ctx.append('authorization','Bearer '+token);
-        ctx.success({ usertoken }, '用户登录成功')
+        ctx.success({ authorization }, '用户登录成功')
       } else {
         ctx.notFound('用户名或者密码错误!', {username, password})
       }

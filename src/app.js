@@ -17,6 +17,28 @@ import ResponseData from './middleware/ResponseData'
 import UserAuth from './middleware/UserAuth'
 import CorsRequest from './middleware/CorsRequest'
 
+// const Koa2 = require('koa')
+// const KoaBody = require('koa-body')
+// const KoaStatic = require('koa-static2')
+// const System = require('./config')
+// const SystemConfig = require('./config')
+// const path = require('path')
+// const MainRoutes = require('./routes')
+// const ErrorRoutesCatch = require('./middleware/ErrorRoutesCatch')
+// const ErrorRoute = require('./routes/error-route')
+// const jwt = require('koa-jwt')
+// const fs = require('fs')
+// const cors = require('koa-cors')
+// // import PluginLoader from './lib/PluginLoader'
+// // 设置数据库链接
+// // const './lib/sequelize'
+// const logger = require('koa-logger')
+// const ResponseData = require('./middleware/ResponseData')
+// const UserAuth = require('./middleware/UserAuth')
+// const CorsRequest = require('./middleware/CorsRequest')
+
+
+
 const app = new Koa2()
 const env = process.env.NODE_ENV || 'development' // Current mode
 
